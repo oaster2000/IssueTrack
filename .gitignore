@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+IssueTracking/.mvn/
+IssueTracking/mvnw
+IssueTracking/mvnw.cmd
