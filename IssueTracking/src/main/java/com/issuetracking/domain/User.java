@@ -1,13 +1,19 @@
 package com.issuetracking.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.issuetracking.security.Authority;
 
 @Entity
 @Table(name="Users")
@@ -17,10 +23,10 @@ public class User {
 	private String username;
 	private String password;
 	private String name;
-	private String accessLevel;
 	
 	private Set<Issue> issues;
 	private Set<Project> projects;
+	private Set<Authority> authorities = new HashSet<>();
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
@@ -48,13 +54,6 @@ public class User {
 		this.name = name;
 	}
 	
-	public String getAccessLevel() {
-		return accessLevel;
-	}
-	public void setAccessLevel(String accessLevel) {
-		this.accessLevel = accessLevel;
-	}
-	
 	@ManyToMany
 	public Set<Issue> getIssues() {
 		return issues;
@@ -71,4 +70,11 @@ public class User {
 		this.projects = projects;
 	}
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="user")
+	public Set<Authority> getAuthorities() {
+		return authorities;
+	}
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
+	}
 }

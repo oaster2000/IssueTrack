@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -57,7 +58,7 @@ public class Project {
 		this.endDate = endDate;
 	}
 	
-	@OneToMany(mappedBy = "project")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "project")
 	public Set<Issue> getIssues() {
 		return issues;
 	}
@@ -65,7 +66,7 @@ public class Project {
 		this.issues = issues;
 	}
 	
-	@ManyToMany(mappedBy = "projects")
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "projects")
 	public Set<User> getUsers() {
 		return users;
 	}
