@@ -67,7 +67,7 @@ public class Issue {
 		this.project = project;
 	}
 
-	@ManyToMany
+	@ManyToMany(mappedBy = "issues")
 	public Set<User> getUsers() {
 		return users;
 	}

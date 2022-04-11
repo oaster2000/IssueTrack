@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,6 +23,7 @@ public class Project {
 	private Date endDate;
 	
 	private Set<Issue> issues;
+	private Set<User> users;
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
@@ -61,5 +63,13 @@ public class Project {
 	}
 	public void setIssues(Set<Issue> issues) {
 		this.issues = issues;
+	}
+	
+	@ManyToMany(mappedBy = "projects")
+	public Set<User> getUsers() {
+		return users;
+	}
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

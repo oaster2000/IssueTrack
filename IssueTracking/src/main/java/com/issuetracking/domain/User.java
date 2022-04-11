@@ -17,8 +17,10 @@ public class User {
 	private String username;
 	private String password;
 	private String name;
+	private String accessLevel;
 	
 	private Set<Issue> issues;
+	private Set<Project> projects;
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
@@ -46,12 +48,27 @@ public class User {
 		this.name = name;
 	}
 	
-	@ManyToMany(mappedBy = "users")
+	public String getAccessLevel() {
+		return accessLevel;
+	}
+	public void setAccessLevel(String accessLevel) {
+		this.accessLevel = accessLevel;
+	}
+	
+	@ManyToMany
 	public Set<Issue> getIssues() {
 		return issues;
 	}
 	public void setIssues(Set<Issue> issues) {
 		this.issues = issues;
+	}
+	
+	@ManyToMany
+	public Set<Project> getProjects() {
+		return projects;
+	}
+	public void setProjects(Set<Project> projects) {
+		this.projects = projects;
 	}
 	
 }
